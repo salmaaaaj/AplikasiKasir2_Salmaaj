@@ -163,6 +163,11 @@ ResultSet rst;
 
         btndaftar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btndaftar.setText("BATAL");
+        btndaftar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndaftarActionPerformed(evt);
+            }
+        });
 
         btnlogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnlogin.setText("LOGIN");
@@ -656,6 +661,10 @@ new FormAbout().setVisible(true);         // TODO add your handling code here:
     private void cmbpwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbpwActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbpwActionPerformed
+
+    private void btndaftarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndaftarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btndaftarActionPerformed
 
     /**
      * @param args the command line arguments

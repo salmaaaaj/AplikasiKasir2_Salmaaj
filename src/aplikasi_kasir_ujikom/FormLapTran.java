@@ -60,6 +60,7 @@ public class FormLapTran extends javax.swing.JFrame {
         tbllaptransaksi = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbldataproduk = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,6 +138,14 @@ public class FormLapTran extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tbldataproduk);
 
+        jButton1.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
+        jButton1.setText("KELUAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -150,20 +159,24 @@ public class FormLapTran extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(sebelumtanggal, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                                .addComponent(sesudahtanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(daritanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(daritanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(sampaitanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(sebelumtanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(sesudahtanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(276, 276, 276)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sampaitanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(197, 197, 197)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btncari2)
                             .addComponent(btncari1)
-                            .addComponent(btncari3)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btncari3)
+                                .addGap(90, 90, 90)
+                                .addComponent(jButton1))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,7 +208,8 @@ public class FormLapTran extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4)
                     .addComponent(sesudahtanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btncari3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btncari3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,7 +269,7 @@ try {
     SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd");
     tanggal = format.format(daritanggal.getDate());
     tanggal2 = format.format(sampaitanggal.getDate());
-    sql = "select * from penjualan where TanggalPenjualan < '"+tanggal+"'";
+   sql = "select * from penjualan where TanggalPenjualan between '"+tanggal+"' and '"+tanggal2+"' ";
     pst = konek.prepareStatement(sql);
     rst = pst.executeQuery();
     tbllaptransaksi.setModel(DbUtils.resultSetToTableModel(rst));
@@ -268,7 +282,7 @@ try {
 try {
     SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd");
     tanggal = format.format(sesudahtanggal.getDate());
-    sql = "select * from penjualan where TanggalPenjualan < '"+tanggal+"'";
+    sql = "select * from penjualan where TanggalPenjualan > '"+tanggal+"'";
     pst = konek.prepareStatement(sql);
     rst = pst.executeQuery();
     tbllaptransaksi.setModel(DbUtils.resultSetToTableModel(rst));
@@ -276,6 +290,10 @@ try {
     JOptionPane.showMessageDialog(null, "Data Tidak Tampil");
 }         // TODO add your handling code here:
     }//GEN-LAST:event_btncari3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,6 +335,7 @@ try {
     private javax.swing.JButton btncari2;
     private javax.swing.JButton btncari3;
     private com.toedter.calendar.JDateChooser daritanggal;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
